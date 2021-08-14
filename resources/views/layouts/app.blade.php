@@ -66,5 +66,6 @@
 
 @stack('page_scripts')
 @yield('scripts')
+
 </body>
 </html>
