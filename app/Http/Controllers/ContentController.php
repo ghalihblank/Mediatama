@@ -20,8 +20,9 @@ class ContentController extends Controller
 
 
         $content2 = DB::table('Contents')
-            ->leftjoin ('Akses', function($join) {
+            ->leftjoin ('Akses', function($join){
                 $join->on('Akses.video_id', '=', 'Contents.id');
+                $join->where('Akses.status', '=', 'Request');
                 })
             ->select('Contents.id', 
             'Contents.nama', 
@@ -62,7 +63,7 @@ class ContentController extends Controller
         ]);
         if ($request->hasfile('filename')) {            
             $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('filename')->getClientOriginalName());
-            $request->file('filename')->move(public_path('video'), $filename);
+            $request->file('filename')->move(storage_path('video'), $filename);
              Content::create(
                     [     
                         'nama' =>$request->nama,                   
@@ -166,6 +167,24 @@ class ContentController extends Controller
         ->with('success','Content updated successfully');
     }
 
+    public function acc($id){
+        $akses = Akses::find($id);
+        $akses->status = 'Approve';
+        $akses->save();
+
+        return redirect()->route('content.index')
+            ->with('success','Request approved successfully');
+    }
+
+    public function decline($id){
+        $akses = Akses::find($id);
+        $akses->status = 'Decline';
+        $akses->save();
+
+        return redirect()->route('content.index')
+            ->with('success','Request declined successfully');
+    }
+    
     /**
     * Remove the specified resource from storage.
     *

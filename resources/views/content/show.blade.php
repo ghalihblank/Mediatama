@@ -26,14 +26,15 @@
                 <td>{{ $x->nama_user }}</td>
                 <td>{{ $x->status_request }}</td>
                 <td>
-                    <form action="{{ route('content.approve',$x->id) }}" method="GET">
+                    <form action="{{ route('content.acc',$x->id) }}" method="POST">
+                        @csrf
                         <button type="submit" class="btn btn-success">Approve</button>
                     </form>
                 </td>
                 <td>
-                    <form action="{{ route('content.destroy',$x->id) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Decline</button>
+                    <form action="{{ route('content.tolak',$x->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Decline</button>
                     </form>
                 </td>
             </tr>

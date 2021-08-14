@@ -9,6 +9,7 @@ use App\Http\Controllers\ContentController;
 
 
 
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
@@ -20,6 +21,9 @@ Route::group(['middleware' => ['role:user|admin']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('materi/{id}', 'MateriController@show')->name('materi.show');
     Route::post('materi/request/{id}', 'MateriController@request')->name('materi.request');
+
+    //streaming video
+    Route::get('get-video/{video}', 'MateriController@getVideo')->name('getVideo');  
 });
 
 Route::group(['middleware' => ['role:admin']], function() {
@@ -34,7 +38,8 @@ Route::group(['middleware' => ['role:admin']], function() {
     Route::post('/save','ContentController@store')->name('content.store');
     Route::post('/delete/{id}','ContentController@destroy')->name('content.destroy');
     Route::get('/approve/{id}','ContentController@approve')->name('content.approve');
-
+    Route::post('/approve/{id}/acc','ContentController@acc')->name('content.acc');
+    Route::post('/approve/{id}/tolak','ContentController@decline')->name('content.tolak');
 });
 
 Route::get('/logout', function(){

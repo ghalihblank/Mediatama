@@ -27,11 +27,25 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Durasi:</strong>
-                    {{ $materi->status }}
+                    {{ $materi->durasi }}
             </div>
         </div>
 
-    @if ($materi->status=="") 
+    @if ($materi->status=="Approve") 
+        <div class="col">
+            <h3>Waktu anda {{$materi->durasi}} menit {{$materi->video}}<h3>
+                <video  width="720" height="540" controls preload="auto">
+                  <source src={{ asset('storage/1628858075401-video1.mp4') }} type="video/mp4">
+                    <source src={{ asset('storage/1628858075401-video1.mp4') }} type="video/webm">  
+                </video>
+            
+        </div>     
+    @elseif ($materi->status=="Request")      
+        <div class="col">
+            <h3>Permintaan anda belum di Approve oleh admin, </br>
+                silakan tunggu<h3>
+        </div>       
+    @elseif ($materi->status<>"Approve") 
         <div class="col">
             <h3>Anda Tidak dapat melihat kontent ini, </br>
                 silakan klik tombol request untuk mengajukan request melihat materi<h3>
@@ -46,7 +60,8 @@
                     </div>
                 </form>
             </div> 
-        </div>       
+        </div>   
+     
     @endif
     </div>
 @endsection

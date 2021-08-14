@@ -9,6 +9,7 @@
         "almasaeed2010/adminlte": "~3.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "imanghafoori/laravel-video": "^2.1",
         "infyomlabs/laravel-ui-adminlte": "^3.1",
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
