@@ -33,12 +33,12 @@
 
     @if ($materi->status=="Approve") 
         <div class="col">
-            <h3>Waktu anda {{$materi->durasi}} menit {{$materi->video}}<h3>
-                <video  width="720" height="540" controls preload="auto">
-                  <source src={{ asset('storage/1628858075401-video1.mp4') }} type="video/mp4">
-                    <source src={{ asset('storage/1628858075401-video1.mp4') }} type="video/webm">  
-                </video>
-            
+            <h3>Waktu anda {{$materi->durasi}} menit<h3>
+                <p>
+                    <iframe src= "{{url('video/'.$materi->video)}}"> 
+
+                    </iframe>
+                </p>
         </div>     
     @elseif ($materi->status=="Request")      
         <div class="col">

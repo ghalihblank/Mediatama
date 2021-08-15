@@ -63,7 +63,7 @@ class ContentController extends Controller
         ]);
         if ($request->hasfile('filename')) {            
             $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('filename')->getClientOriginalName());
-            $request->file('filename')->move(storage_path('video'), $filename);
+            $request->file('filename')->move('video/', $filename);
              Content::create(
                     [     
                         'nama' =>$request->nama,                   
